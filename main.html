@@ -1,1 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Year Tracker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+      background: #f0f0f0;
+    }
+    .tracker {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      display: inline-block;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .progress-bar {
+      height: 30px;
+      background: #ddd;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-top: 20px;
+    }
+    .progress-fill {
+      height: 100%;
+      background: #4caf50;
+      width: 0;
+      transition: width 1s;
+    }
+  </style>
+</head>
+<body>
+  <div class="tracker">
+    <h1>Year Tracker</h1>
+    <p id="daysLeft"></p>
+    <p id="percentGone"></p>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
 
+  <script>
+    const now = new Date();
+    const start = new Date(now.getFullYear(), 0, 1);
+    const end = new Date(now.getFullYear() + 1, 0, 1);
+    
+    const totalDays = (end - start) / (1000 * 60 * 60 * 24);
+    const passedDays = (now - start) / (1000 * 60 * 60 * 24);
+    const daysLeft = Math.floor(totalDays - passedDays);
+    const percentGone = (passedDays / totalDays) * 100;
+
+    document.getElementById("daysLeft").textContent = Days left in the year: ${daysLeft};
+    document.getElementById("percentGone").textContent = Year completed: ${percentGone.toFixed(2)}%;
+    document.getElementById("progressFill").style.width = percentGone + '%';
+  </script>
+</body>
+</html>
